@@ -1,11 +1,20 @@
 const { isValidUser } = require("../utils/authUtils")
 
-const validateUser = (req, res, next) => {
-    if (isValidUser(req.body.username, req.body.password)) {
-        return res.status(401).json({ error: "Invalid credentials" })
-    }
+const validateUser = async (req, res, next) => {
+    const { username, password } = req.body;
 
-    next()
+    try {
+        const userIsValid = await isValidUser(username, password);
+
+        if (!userIsValid) {
+            return res.status(401).json({ error: "Invalid credentials" });
+        }
+        
+        next();
+    } catch (error) {
+        console.error("Error validating user:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
 }
 
 const authenticateUser = (req, res, next) => {
