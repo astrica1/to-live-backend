@@ -19,23 +19,27 @@ const Post = sequelize.define("posts", {
         allowNull: false
     },
     image: {
-        type:DataTypes.BLOB('medium'),
+        type: DataTypes.BLOB('medium'),
         allowNull: true
     }
 });
 
 Post.belongsTo(Category, {
     'foreignKey': {
-        'name': 'categoryID',
-        'allowNull': false,
-    }
+        name: 'categoryID',
+        allowNull: false
+    },
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
 });
 
 Post.belongsTo(User, {
     'foreignKey': {
-        'name': 'author',
-        'allowNull': false
-    }
+        name: 'author',
+        allowNull: false
+    },
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
 });
 
 if (process.argv.includes('force')) {

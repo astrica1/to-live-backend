@@ -13,11 +13,10 @@ async function getAllPosts() {
 
 async function createPost(title, content, username, categoryName) {
     try {
-        const categoryId = await getCategoryIdByName(categoryName);
         const post = await Post.create({
             title: title,
             content: content,
-            categoryID: categoryId,
+            categoryID: categoryName,
             author: username
         });
         return post;

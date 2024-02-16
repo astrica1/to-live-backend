@@ -38,3 +38,4 @@ DELETE  localhost:7000/user/deactive    body {
                                             "username": "user1",
                                             "password": "liuadvadjlcnj"
                                         }
+

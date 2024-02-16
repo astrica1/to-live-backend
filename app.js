@@ -1,6 +1,7 @@
 const express = require("express");
 const postsRouter = require("./routes/posts");
 const usersRouter = require("./routes/users");
+const categoryRouter = require("./routes/categories");
 const { logger } = require("./middleware/loggerMiddleware");
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(logger);
 //#region Define Routes
 app.use('/post', postsRouter)
 app.use('/user', usersRouter)
+app.use('/category', categoryRouter)
 app.get('/', (req, res) => {
     res.status(200).send(`
         <p>
