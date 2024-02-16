@@ -1,0 +1,40 @@
+get list of all posts:
+GET     localhost:7000/post/all/        body {}
+
+create new posts:
+POST    localhost:7000/post/            body {
+                                            "title": "title 2",
+                                            "content": "content 2",
+                                            "username": "user1",
+                                            "category": "category1"
+                                        }
+
+get post by id:
+GET     localhost:7000/post/:id         body {}
+
+get all users list:
+GET     localhost:7000/user/all         body {}
+
+register new user:
+POST    localhost:7000/user/register    body {
+                                            "username": "user1",
+                                            "name": "mamali",
+                                            "email": "mamali@mail.co",
+                                            "password": "liuadvadjlcnj",
+                                            "isAdmin": "0"
+                                        }
+
+login user:
+POST    localhost:7000/user/login       body {
+                                            "username": "user1",
+                                            "password": "liuadvadjlcnj"
+                                        }
+
+get user data by id:
+GET     localhost:7000/user/id/:id      body {}
+
+delete existing user:
+DELETE  localhost:7000/user/deactive    body {
+                                            "username": "user1",
+                                            "password": "liuadvadjlcnj"
+                                        }
