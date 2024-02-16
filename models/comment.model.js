@@ -14,19 +14,23 @@ const Comment = sequelize.define("comments", {
         type: DataTypes.STRING,
         allowNull: false
     }
+}, {
+    timestamps: false,
+    createdAt: false,
+    updatedAt: false,
 });
 
 Comment.belongsTo(User, {
-    foreignKey: {
-        name: 'username',
-        allowNull: false
+    'foreignKey': {
+        'name': 'username',
+        'allowNull': false
     }
 });
 
 Comment.belongsTo(Post, {
-    foreignKey: {
-        name: 'postID',
-        allowNull: false
+    'foreignKey': {
+        'name': 'postID',
+        'allowNull': false
     }
 });
 

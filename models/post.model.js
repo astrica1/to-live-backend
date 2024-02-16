@@ -17,20 +17,24 @@ const Post = sequelize.define("posts", {
     content: {
         type: DataTypes.TEXT,
         allowNull: false
+    },
+    image: {
+        type:DataTypes.BLOB('medium'),
+        allowNull: true
     }
 });
 
 Post.belongsTo(Category, {
-    foreignKey: {
-        name: 'categoryID',
-        allowNull: false
+    'foreignKey': {
+        'name': 'categoryID',
+        'allowNull': false,
     }
 });
 
 Post.belongsTo(User, {
-    foreignKey: {
-        name: 'author',
-        allowNull: false
+    'foreignKey': {
+        'name': 'author',
+        'allowNull': false
     }
 });
 

@@ -10,19 +10,23 @@ const Like = sequelize.define("likes", {
         autoIncrement: true,
         primaryKey: true
     }
+}, {
+    timestamps: false,
+    createdAt: false,
+    updatedAt: false,
 });
 
 Like.belongsTo(User, {
-    foreignKey: {
-        name: 'username',
-        allowNull: false
+    'foreignKey': {
+        'name': 'username',
+        'allowNull': false
     }
 });
 
 Like.belongsTo(Post, {
-    foreignKey: {
-        name: 'postID',
-        allowNull: false
+    'foreignKey': {
+        'name': 'postID',
+        'allowNull': false
     }
 });
 

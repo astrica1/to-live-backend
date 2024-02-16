@@ -1,3 +1,4 @@
+const { Category } = require('./category.model');
 const { sequelize, DataTypes, authenticate, sync, fsync } = require('./index.model');
 
 authenticate();
@@ -29,6 +30,10 @@ const User = sequelize.define("users", {
     createdAt: false,
     updatedAt: false,
 });
+
+// User.belongsToMany(Category, {
+//     'as': 'favorites',
+// })
 
 if (process.argv.includes('force')) {
     fsync('user')
