@@ -46,26 +46,60 @@ router.put('/:postID', (req, res) => {
     res.json({ message: `post: ${postID} is updated` });
 });
 
-router.delete('/:postID', (req, res) => {
+router.delete('/:postID', async (req, res) => {
     const { postID } = req.params;
-    res.json({ message: `post: ${postID} is deleted` });
+    try {
+        const post = await service.deletePost(postID);
+        if (post) {
+            res.status(200).json({ message: 'post deleted successfully' });
+        } else {
+            res.status(401).json({ message: 'Invalid post' });
+        }
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
-router.get('/:postID/likes', (req, res) => {
+router.get('/:postID/likes', async (req, res) => {
     const { postID } = req.params;
-    res.json({ message: `list of post ${postID} likes` });
+    try {
+        const usernames = await service.getLikesOfPost(postID);
+        res.status(200).json(usernames);
+    } catch (error) {
+        console.error('Error getting post likes:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
-router.post('/:postID/like', validateUser, (req, res) => {
+router.post('/:postID/like', async (req, res) => {
     const { postID } = req.params;
-    const { user } = req.body;
-    res.json({ message: `post ${postID} liked by ${user}` });
+    const { username } = req.body;
+    try {
+        const like = await service.likePost(postID, username);
+        if(!like) {
+            res.status(500).json({ message: 'This post was liked previously'});
+        }
+        res.status(201).json(post);
+    } catch (error) {
+        console.error('Error creating post:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
-router.post('/:postID/unlike', validateUser, (req, res) => {
+router.post('/:postID/unlike', async (req, res) => {
     const { postID } = req.params;
-    const { user } = req.body;
-    res.json({ message: `post ${postID} unliked by user ${user}` });
+    const { username } = req.body;
+    try {
+        const like = await service.unLikePost(postID, username);
+        if(!like) {
+            res.status(500).json({ message: 'This post was not liked previously'});
+        }
+        res.status(200).json({ message: 'Post liked successfully'});
+    } catch (error) {
+        console.error('Error creating post:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 
