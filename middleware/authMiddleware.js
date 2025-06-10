@@ -25,4 +25,6 @@ const authenticateUser = (req, res, next) => {
     next();
 };
 
+//TODO: Impl jwt
+
 module.exports = { validateUser, authenticateUser }
