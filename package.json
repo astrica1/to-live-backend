@@ -1,6 +1,6 @@
 {
   "name": "to-live-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -19,7 +19,8 @@
     "url": "git+https://github.com/astrica1/to-live-backend.git"
   },
   "keywords": [
-    "blog"
+    "blog",
+    "social media"
   ],
   "author": "astrica1",
   "license": "MIT",
